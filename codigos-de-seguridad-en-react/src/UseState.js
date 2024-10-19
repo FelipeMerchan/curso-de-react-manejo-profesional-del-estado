@@ -1,7 +1,21 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export const UseState = ({ name }) => {
   const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    console.log('Empezando Effect')
+    if (!!loading) {
+      setTimeout(() => {
+        console.log('Cambiar estado loading')
+        setLoading(false)
+        console.log('terminar estado loading')
+      }, 2000);
+    }
+    console.log('Terminando Effect')
+  }, [loading])
+  
 
   return (
     <>
@@ -10,9 +24,12 @@ export const UseState = ({ name }) => {
         {error && (
           <p>Error: el código es incorrecto</p>
         )}
+        {loading && (
+          <p>Cargando...</p>
+        )}
 
         <input placeholder="Código de seguridad" />
-        <button onClick={() => setError(prev => !prev)}>Comprobar</button>
+        <button onClick={() => setLoading(true)}>Comprobar</button>
       </>
   )
 }
