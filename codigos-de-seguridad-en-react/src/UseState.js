@@ -8,6 +8,7 @@ export const UseState = ({ name }) => {
   const [loading, setLoading] = useState(false)
 
   const handleChange = (event) => {
+    //setError(false)
     setValue(event.target.value)
   }
 
@@ -25,13 +26,13 @@ export const UseState = ({ name }) => {
       }, 2000);
     }
     console.log('Terminando Effect')
-  }, [loading])
+  }, [loading, value])
 
   return (
     <>
         <h2>Eliminar {name}</h2>
         <p>Por favor, escribe el código de seguridad.</p>
-        {error && (
+        {(error && !loading) && (
           <p>Error: el código es incorrecto</p>
         )}
         {loading && (
